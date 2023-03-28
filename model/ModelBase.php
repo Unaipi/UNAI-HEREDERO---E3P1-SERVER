@@ -6,7 +6,6 @@ class ModelBase extends Conexion
 {
     protected $conexion;
     protected $table_name;
-    protected $table_name2;
 
 
 
@@ -32,6 +31,21 @@ class ModelBase extends Conexion
         return $array;
         
     }
+
+
+    function getAllBy2Columns($search_name1, $search_value1, $search_name2, $search_value2)
+    {
+        $query = $this->selectDBMultiple($this->table_name,"*",$search_name1, $search_value1, $search_name2, $search_value2);
+        $result = $this->conexion->query($query);
+
+        
+        //Creamos el array asociativo para devolver los datos
+        $array = $this->createArray($result);
+
+        $result->close();
+        return $array;
+    }
+
 
     //obtiene todos los elementos de la tabla cartas con join de categorias
     function getAllWithCategories($category)
@@ -125,6 +139,17 @@ class ModelBase extends Conexion
         //echo $query;
     }
 
+    protected function selectDBMultiple($table, $columns = "*", $name1 = "", $value1 = "", $name2 = "", $value2 = "")
+    {
+        $query = "SELECT $columns FROM $table";
+        if ($name1 != "" && $value1 != "")
+            $query .= " WHERE $name1 = '$value1'";
+        if ($name2 != "" && $value2 != "")
+            $query .= " AND $name2 = '$value2'";
+
+        //echo $query;
+        return $query;
+    }
 
 
 
