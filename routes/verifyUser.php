@@ -3,23 +3,23 @@
 require_once (__DIR__.'/../functions.php');
 require_once (__DIR__.'/../controller/Controller.php');
 
-if(isset($_POST['name']) && isset($_POST['lastName']))
+if(isset($_POST['name']) && isset($_POST['password']))
 {
         $name   = sanitizeString($_POST['name']);
-        $lastName   = sanitizeString($_POST['lastName']);
+        $password   = sanitizeString($_POST['password']);
 
         $userSend['name']   = "";
-        $userSend['lastName']   = "";
+        $userSend['password']   = "";
         $userSend['error']   = "";
 
 
-    if($name == "" || $lastName == "")
+    if($name == "" || $password == "")
     {
         $userSend['error'] = "Not all the fields were entered";
     }
     else
     {
-        $resultArray = $user->getAllBy2Columns("name", $name, "lastName", $lastName);
+        $resultArray = $user->getAllBy2Columns("name", $name, "password", $password);
         
         if($resultArray == null)
         {
@@ -28,7 +28,7 @@ if(isset($_POST['name']) && isset($_POST['lastName']))
         else
         {
             $userSend['name']   = $name;
-            $userSend['lastName']   = $lastName;
+            $userSend['password']   = $password;
         }
 
     }
