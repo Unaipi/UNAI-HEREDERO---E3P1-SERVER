@@ -19,21 +19,54 @@ if(isset($_POST['name']) && isset($_POST['password']))
     }
     else
     {
-        $resultArray = $user->getAllBy2Columns("name", $name, "password", $password);
-        
-        if($resultArray == null)
-        {
-            $userSend['error'] = "Invalid login attempt";
-        }
-        else
-        {
-            $userSend['name']   = $name;
-            $userSend['password']   = $password;
-        }
+         $resultArray = $user ->getAllByColumn("name",$name);
 
+         if($resultArray == null)
+         {
+             $userSend['error'] ='Name erroneo';
+         }
+         else
+         {
+            $hash ='$2y$10$QJ7GcWeP9N7RXWWGepnTb.H9mTNFbhzf4NLD1J6ZSypgdo9V0ZUXa';
+
+             if(password_verify($password, $hash))
+             {
+                 $userSend = array();
+                 foreach ($resultArray as $row)
+                 {
+                     
+                     unset($row['password']);
+                     $userSend[] = $row;
+                 }
+             }
+            else
+            {
+            $userSend ['error'] = "Error password";
+            echo password_verify(password_verify($password, $hash));
+            //echo $resultArray[0]['password'];
+
+
+            
+            } 
+         }
     }
+//     {
+//         $resultArray = $user->getAllBy2Columns("name", $name, "password", $password);
+        
+//         if($resultArray == null)
+//         {
+//             $userSend['error'] = "Invalid login attempt";
+//         }
+//         else
+//         {
+//             $userSend['name']   = $name;
+//             $userSend['password']   = $password;
+//         }
 
-    echo json_encode($userSend);
+//     }
+
+    $json_user = json_encode($userSend);
+    echo $json_user;
 }
 else
 {
