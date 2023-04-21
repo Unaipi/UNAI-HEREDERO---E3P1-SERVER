@@ -94,6 +94,7 @@ class ModelBase extends Conexion
 
     protected function createArray($data)
     {
+        $array =[];
         //creamos el array asociativo para devolver los datos
         while ($row = $data->fetch_array(MYSQLI_ASSOC))
         {
@@ -101,9 +102,9 @@ class ModelBase extends Conexion
             $array[] = $row;
 
             //echo "entra";
-            return $array;
+            
         }
-
+        return $array;
     }
 
     //Devuelve un query de la forma "SELECT * FROM table WHERE author='Jane Austen'"ç
