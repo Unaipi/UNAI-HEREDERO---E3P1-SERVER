@@ -101,10 +101,8 @@ class ModelBase extends Conexion
             $array[] = $row;
 
             //echo "entra";
-            
+            return $array;
         }
-
-        return $array;
 
     }
 

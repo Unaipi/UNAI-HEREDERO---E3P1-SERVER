@@ -19,12 +19,13 @@ if(isset($_POST['name']) && isset($_POST['password']))
     }
     else
     {
-         $resultArray = $user ->getAllByColumn("name",$name);
+        
+         $resultArray = $user->getAllByColumn("name", $name);
+
          if($resultArray == null)
          {
-             $userSend['error'] ='Name erroneo';
+             $userSend['error'] ='Username not correct';
          }
-
          else
          {
             // echo $password;
@@ -41,15 +42,16 @@ if(isset($_POST['name']) && isset($_POST['password']))
                 }
                 else
                 {
-                    $userSend ['error'] = "Error password";
+                    $userSend ['error'] = "Password not correct";
                     
                     //echo password_verify($password, $hash);
                     //echo $resultArray[0]['password'];
                 } 
             }
+            
+    }
             $json_user = json_encode($userSend);
             echo $json_user;
-    }
 }
 else
 {
