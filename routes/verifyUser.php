@@ -38,20 +38,20 @@ if(isset($_POST['name']) && isset($_POST['password']))
                      
                      unset($row['password']);
                      $userSend[] = $row;
-                    }
                 }
-                else
-                {
-                    $userSend ['error'] = "Password not correct";
-                    
-                    //echo password_verify($password, $hash);
-                    //echo $resultArray[0]['password'];
-                } 
-            }
+             }
+            else
+            {
+                $userSend ['error'] = "Password not correct";
+                
+                //echo password_verify($password, $hash);
+                //echo $resultArray[0]['password'];
+            } 
+        }
             
     }
-            $json_user = json_encode($userSend);
-            echo $json_user;
+        $json_user = json_encode($userSend);
+        echo $json_user;
 }
 else
 {
