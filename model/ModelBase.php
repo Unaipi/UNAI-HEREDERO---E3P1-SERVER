@@ -92,6 +92,17 @@ class ModelBase extends Conexion
         
     }
 
+    //Función que añade un elemento nuevo en la tabla
+    function register($array)
+    {
+        $query = $this->insertDB($this->table_name, $array);
+
+        $result = $this->conexion->query($query);
+
+        return $result;
+        
+    }
+
     protected function createArray($data)
     {
         $array =[];

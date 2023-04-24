@@ -27,9 +27,8 @@ if(isset($_POST['name']) && isset($_POST['password']))
              $userSend['error'] ='Username not correct';
          }
          else
-         {
-            // echo $password;
-            // echo $resultArray[0]['password'];
+         {  
+
              if(password_verify($password, $resultArray[0]['password']))
              {
                  $userSend = array();
@@ -44,8 +43,6 @@ if(isset($_POST['name']) && isset($_POST['password']))
             {
                 $userSend ['error'] = "Password not correct";
                 
-                //echo password_verify($password, $hash);
-                //echo $resultArray[0]['password'];
             } 
         }
             
