@@ -163,7 +163,13 @@ class ModelBase extends Conexion
 
 
 
+    //PDATE `users` SET `password` = '$2y$10$pmJErXkNCqU6fJDg8/dDWe6QbOVPGsXqziFPp1CEL7xa6VW2EwITd\r\n' WHERE `users`.`name` = 'unai';
+    function changePassDB($password_value, $name_value){
 
+        $query = "UPDATE users SET password = '$password_value' WHERE name='$name_value'";
+
+        $result = $this->conexion->query($query);
+    }
 
     protected function insertDB($table, $array)
     {
@@ -198,6 +204,8 @@ class ModelBase extends Conexion
 
         return $query;
     }
+
+    
 
 }
 
