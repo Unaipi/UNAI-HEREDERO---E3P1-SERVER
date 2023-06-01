@@ -23,7 +23,6 @@
             {
   
                 $resultArray = $user->getAllByColumn("gmail", $fuser['gmail']);
-                //$userSend['error']="";
 
                 if($resultArray == null)
                 {
@@ -32,9 +31,7 @@
                 else 
                 {
                     $hashedpass = password_hash($fuser['pasahitza'], PASSWORD_DEFAULT);
-                    $resultArray = $user->changePassDB($hashedpass, $fuser['gmail']);
-                    //$userSend['correct'] = ["Changed Pass"];
-                    
+                    $resultArray = $user->changePassDB($hashedpass, $fuser['gmail']);                    
                 }
             }
            

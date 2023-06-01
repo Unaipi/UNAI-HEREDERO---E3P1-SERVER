@@ -32,7 +32,6 @@ if(isset($_POST['gmail']) && isset($_POST['pasahitza']))
                 {
                     unset($row['pasahitza']);
 
-                    // Obtener el rol del usuario
                     $rola = obtenerRol($row['gmail']);
 
                     $row['rola'] = $rola;
