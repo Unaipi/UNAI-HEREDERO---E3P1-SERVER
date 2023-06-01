@@ -40,9 +40,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
   // Ejecutar la consulta
   if ($conn->query($sql) === TRUE) {
-    echo 'Nuevo usuario creado correctamente';
+    echo 'valid';
   } else {
-    echo 'Error al crear el nuevo usuario: ' . $conn->error;
+    echo 'not valid ' . $conn->error;
   }
 
   // Cerrar la conexión

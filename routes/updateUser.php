@@ -1,20 +1,24 @@
 <?php
 
-// Verifica si se ha enviado una solicitud POST
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-  // Obtener los datos enviados por la solicitud POST
+
   $currentGmail = $_POST['currentGmail'];
   $gmail = $_POST['gmail'];
   $pasahitza = password_hash($_POST['pasahitza'], PASSWORD_DEFAULT);
   $rola = $_POST['rola'];
 
-  // Verificar si el correo electrónico tiene el formato correcto
+
+  if (empty($gmail) || empty($pasahitza) || empty($rola)) {
+    echo 'Todos los campos deben estar llenos.';
+    exit;
+  }
+
   if (!filter_var($gmail, FILTER_VALIDATE_EMAIL)) {
     echo 'El correo electrónico no tiene un formato válido.';
     exit;
   }
 
-  // Conectarse a la base de datos (ajusta estos valores según tu configuración)
   $servername = 'localhost';
   $username = 'root';
   $password = '';
@@ -22,12 +26,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
   $conn = new mysqli($servername, $username, $password, $dbname);
 
-  // Verificar la conexión
+
   if ($conn->connect_error) {
     die('Error de conexión a la base de datos: ' . $conn->connect_error);
   }
 
-  // Consulta SQL para verificar si el correo electrónico se repite en la base de datos
+
   $sql = "SELECT * FROM erabiltzailea WHERE gmail = '$gmail'";
   $result = $conn->query($sql);
 
@@ -36,19 +40,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     exit;
   }
 
-  // Consulta SQL para actualizar la base de datos
+  
   $sql = "UPDATE erabiltzailea SET gmail ='$gmail', pasahitza='$pasahitza', rola='$rola' WHERE gmail='$currentGmail'";
+
 
   // Ejecutar la consulta
   if ($conn->query($sql) === TRUE) {
-    echo 'Base de datos actualizada correctamente';
+    echo 'valid';
   } else {
-    echo 'Error al actualizar la base de datos: ' . $conn->error;
+    echo 'not valid ' . $conn->error;
   }
 
-  // Cerrar la conexión
   $conn->close();
-  echo '<script>window.location.href = "index.html";</script>';
 }
 
 ?>

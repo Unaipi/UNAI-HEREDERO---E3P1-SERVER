@@ -14,18 +14,6 @@ class ModelBase extends Conexion
         $this->conexion = parent::getInstance();
     }
 
-    // function selectUserRol()
-    // {
-    //     selectDB($table = "erabiltzailea", $column = "rola", $name = "gmail", $value = "");
-
-    //     $query = "SELECT $column FROM $table WHERE $name";
-
-    //     ///////////////////////////
-        
-    //     //echo $query;
-    //     return $query;
-    // }
-    
     //obtiene todos los elementos de la tabla
     function getAll()
     {
