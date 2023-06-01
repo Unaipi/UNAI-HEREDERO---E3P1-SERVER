@@ -3,36 +3,36 @@
     require_once (__DIR__."/../controller/Controller.php");
 
 
-    if (isset($_POST['name']) && isset($_POST['password']) )
+    if (isset($_POST['gmail']) && isset($_POST['pasahitza']) )
     {
 
-        $fuser['name'] = $_POST['name'];
-        $fuser['password']    = $_POST['password'];
+        $fuser['gmail'] = $_POST['gmail'];
+        $fuser['pasahitza']    = $_POST['pasahitza'];
 
-        $userSend['name']   = "";
-        $userSend['password']   = "";
+        $userSend['gmail']   = "";
+        $userSend['pasahitza']   = "";
         $userSend['error']   = "";
 
         
             
-            if($fuser['name'] == "" || $fuser['password'] == "")
+            if($fuser['gmail'] == "" || $fuser['pasahitza'] == "")
             {
                 $userSend['error'] = "Not all the fields were entered";
             }
             else
             {
   
-                $resultArray = $user->getAllByColumn("name", $fuser['name']);
+                $resultArray = $user->getAllByColumn("gmail", $fuser['gmail']);
                 //$userSend['error']="";
 
                 if($resultArray == null)
                 {
-                    $userSend['error'] = ["Invalid name"];
+                    $userSend['error'] = ["Invalid gmail"];
                 }
                 else 
                 {
-                    $hashedpass = password_hash($fuser['password'], PASSWORD_DEFAULT);
-                    $resultArray = $user->changePassDB($hashedpass, $fuser['name']);
+                    $hashedpass = password_hash($fuser['pasahitza'], PASSWORD_DEFAULT);
+                    $resultArray = $user->changePassDB($hashedpass, $fuser['gmail']);
                     //$userSend['correct'] = ["Changed Pass"];
                     
                 }

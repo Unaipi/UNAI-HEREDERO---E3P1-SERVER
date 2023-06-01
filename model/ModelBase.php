@@ -1,5 +1,5 @@
 <?php
-
+require_once (__DIR__.'/../functions.php');
 require_once (__DIR__."/../db/Conexion.php");
 
 class ModelBase extends Conexion
@@ -14,13 +14,24 @@ class ModelBase extends Conexion
         $this->conexion = parent::getInstance();
     }
 
+    // function selectUserRol()
+    // {
+    //     selectDB($table = "erabiltzailea", $column = "rola", $name = "gmail", $value = "");
 
+    //     $query = "SELECT $column FROM $table WHERE $name";
+
+    //     ///////////////////////////
+        
+    //     //echo $query;
+    //     return $query;
+    // }
+    
     //obtiene todos los elementos de la tabla
     function getAll()
     {
         $query = $this->selectDB($this->table_name);
         //echo $query;
-        //echo "Table name: " . $this->table_name;
+       
         $result = $this->conexion->query($query);
         // echo $result;
         //creamos el array asociativo para devolver los datos
@@ -63,9 +74,6 @@ class ModelBase extends Conexion
         return $array;
         
     }
-
-
-
 
     //obtiene todos los elementos en la tabla, filtrados por un valor de una columna
     function getAllByColumn($search_name, $search_value)
@@ -123,7 +131,7 @@ class ModelBase extends Conexion
     //$table: Nombre de la tabla(FROM)
     //$columns: Columnas a extraer (SELECT). 
 
-    protected function selectDB($table, $columns = "*", $name = "", $value = "")
+    public function selectDB($table, $columns = "*", $name = "", $value = "")
     {
         ////////////////////////////
         $query = "SELECT $columns FROM $table";
@@ -166,10 +174,13 @@ class ModelBase extends Conexion
     //PDATE `users` SET `password` = '$2y$10$pmJErXkNCqU6fJDg8/dDWe6QbOVPGsXqziFPp1CEL7xa6VW2EwITd\r\n' WHERE `users`.`name` = 'unai';
     function changePassDB($password_value, $name_value){
 
-        $query = "UPDATE users SET password = '$password_value' WHERE name='$name_value'";
+        $query = "UPDATE erabiltzailea SET pasahitza = '$password_value' WHERE gmail='$name_value'";
 
         $result = $this->conexion->query($query);
     }
+
+
+    
 
     protected function insertDB($table, $array)
     {

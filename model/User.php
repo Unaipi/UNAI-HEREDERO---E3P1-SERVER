@@ -6,7 +6,7 @@ class User extends ModelBase
 {
     function __construct()
     {
-        $this->table_name = "users";
+        $this->table_name = "erabiltzailea";
 
         parent::__construct();
     }

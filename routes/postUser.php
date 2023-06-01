@@ -3,27 +3,33 @@
     require_once (__DIR__."/../controller/Controller.php");
 
 
-    if (isset($_POST['name']) && isset($_POST['password']) )
+    if (isset($_POST['gmail']) && isset($_POST['pasahitza']) )
     {
-        //Si se reciben todos los datos por POST Creamos nuestro nuevo objeto
-        $newUser['name']   = $_POST['name'];
-        $newUser['password']    = password_hash($_POST['password'],PASSWORD_DEFAULT);
+        $newUser['gmail'] = $_POST['gmail'];
+        $newUser['pasahitza'] = password_hash($_POST['pasahitza'], PASSWORD_DEFAULT);
 
-        //password_hash($password,PASSWORD_DEFAULT)
+        if (filter_var($newUser['gmail'], FILTER_VALIDATE_EMAIL)) {
+            // La dirección de correo electrónico es válida
 
-        //Añadimos el nuevo objeto a la BD
-        
+            // Añade el nuevo objeto a la base de datos
             $returnValue = $user->addNew($newUser);
 
-            if ($returnValue == FALSE)
-            {
-                echo "Error en la introduccion de nuevo elemento en la BD";
-            }
-            else
-            {
-                //Devolvemos el resultado añadido de la BD con JSON
+            if ($returnValue == false) {
+                echo "Error en la introducción de un nuevo elemento en la base de datos";
+            } else {
+                // Devuelve el resultado añadido de la base de datos como JSON
                 echo json_encode($newUser);
             }
+        } else {
+            // La dirección de correo electrónico no es válida
+    $errorResponse = [
+        
+        'error' => 'La dirección de correo electrónico no es válida'
+    ];
+    $userSend['error'] = "Not all the fields were entered";
+    echo json_encode($errorResponse);
+    
+}
         
         
     }
